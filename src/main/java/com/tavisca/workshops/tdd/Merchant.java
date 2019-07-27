@@ -1,23 +1,22 @@
 package com.tavisca.workshops.tdd;
 
 public class Merchant {
-    TypeOneParser typeOneParser ;
-    TypeTwoParser typeTwoParser ;
-    QuestionParser questionParser ;
-    ParsedQuestionSolver parsedQuestionSolver;
-    InterGalacticUnitsComputer interGalacticUnitsComputer;
-    WordToRomanValueMapper wordToRomanValueMapper ;
-    WordToDecimalValueMapper wordToDecimalValueMapper ;
-    RomanToNumeral romanToNumeral;
-    ResultsCalculator resultsCalculator;
+    private TypeOneParser typeOneParser ;
+    private TypeTwoParser typeTwoParser ;
+    private QuestionParser questionParser ;
+    private ParsedQuestionSolver parsedQuestionSolver;
+    private InterGalacticUnitsComputer interGalacticUnitsComputer;
+//    WordToRomanValueMapper wordToRomanValueMapper ;
+    private WordToValueMapper wordToValueMapper;
+    private RomanToNumeral romanToNumeral;
+
 
     public String[] solveManyQuestions(String[] typeOneSentences, String[] typeTwoSentences, String[] questions) {
         typeOneParser = new TypeOneParser();
         typeTwoParser = new TypeTwoParser();
         questionParser = new QuestionParser();
         interGalacticUnitsComputer = new InterGalacticUnitsComputer();
-        wordToDecimalValueMapper = WordToDecimalValueMapper.getInstance();
-        wordToRomanValueMapper = WordToRomanValueMapper.getInstance();
+        wordToValueMapper = WordToValueMapper.getInstance();
         parsedQuestionSolver = new ParsedQuestionSolver();
         //code for parsers
         String[][] typeOneParsed = typeOneParser.parseMany(typeOneSentences);
@@ -27,9 +26,9 @@ public class Merchant {
         //computation begins here
 
         String[] resultsArray = new String[questions.length];
-        wordToRomanValueMapper.mapMany(typeOneParsed);
+        wordToValueMapper.mapMany(typeOneParsed);
         String[][] interGalacticUnitsSolved = interGalacticUnitsComputer.computeMany(typeTwoParsed);
-        wordToDecimalValueMapper.mapMany(interGalacticUnitsSolved);
+        wordToValueMapper.mapMany(interGalacticUnitsSolved);
 
         resultsArray = parsedQuestionSolver.solveMany(questionsParsed);
         return resultsArray;

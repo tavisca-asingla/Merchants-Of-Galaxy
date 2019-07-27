@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParsedQuestionSolverTest {
-    ParsedQuestionSolver parsedQuestionSolver;
+    private ParsedQuestionSolver parsedQuestionSolver;
 
     @BeforeEach
     public void init(){
@@ -15,7 +15,7 @@ class ParsedQuestionSolverTest {
     @Test
     public void solveMuchArray(){
         String[][] parsedQuestion = new String[][]{{"much"},{"pish","tegj","glob","glob"}};
-        WordToRomanValueMapper.getInstance().mapMany(new String[][]{{"pish","X"},{"glob","I"},{"tegj","L"},{"prok","V"}});
+//        WordToRomanValueMapper.getInstance().mapMany(new String[][]{{"pish","X"},{"glob","I"},{"tegj","L"},{"prok","V"}});
         String computedResult = parsedQuestionSolver.solve(parsedQuestion);
         String expectedResult = "pish tegj glob glob is 42";
         assertEquals(expectedResult,computedResult);

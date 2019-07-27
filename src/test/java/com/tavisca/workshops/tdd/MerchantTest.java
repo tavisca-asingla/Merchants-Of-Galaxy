@@ -6,14 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MerchantTest {
-    Merchant merchant;
-    TypeOneParser typeOneParser ;
-    TypeTwoParser typeTwoParser;
-    QuestionParser questionParser;
-    WordToRomanValueMapper wordToRomanValueMapper;
-    WordToDecimalValueMapper wordToDecimalValueMapper;
-    RomanToNumeral romanToNumeral;
-    ResultsCalculator resultsCalculator;
+    private Merchant merchant;
+    private TypeOneParser typeOneParser ;
+    private TypeTwoParser typeTwoParser;
+    private QuestionParser questionParser;
+    private WordToValueMapper wordToValueMapper;
+    private RomanToNumeral romanToNumeral;
 
     @BeforeEach
     public void setUp(){
@@ -21,10 +19,10 @@ class MerchantTest {
         typeOneParser = new TypeOneParser();
         typeTwoParser = new TypeTwoParser();
         questionParser = new QuestionParser();
-        wordToDecimalValueMapper = WordToDecimalValueMapper.getInstance();
-        wordToRomanValueMapper = WordToRomanValueMapper.getInstance();
+        wordToValueMapper = WordToValueMapper.getInstance();
+//        wordToRomanValueMapper = WordToRomanValueMapper.getInstance();
         romanToNumeral = new RomanToNumeral();
-        resultsCalculator = new ResultsCalculator();
+
     }
 
     @Test

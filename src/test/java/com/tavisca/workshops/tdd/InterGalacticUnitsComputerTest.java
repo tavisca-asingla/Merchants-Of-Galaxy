@@ -4,21 +4,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InterGalacticUnitsComputerTest {
-    InterGalacticUnitsComputer iGUC ;
-    WordToRomanValueMapper w2RVM;
-//    WordToDecimalValueMapper w2NVM;
-    TypeOneParser w2R ;
-    RomanToNumeral r2N;
-    TypeTwoParser s2A;
+    private InterGalacticUnitsComputer iGUC ;
+    private WordToValueMapper wordToValueMapper;
+    private TypeOneParser typeOneParser;
+    private RomanToNumeral romanToNumeral;
+    private TypeTwoParser typeTwoParser;
 
     @BeforeEach
     public void init(){
         iGUC = new InterGalacticUnitsComputer();
-        r2N = new RomanToNumeral();
-        w2RVM = WordToRomanValueMapper.getInstance();
-//        w2NVM = new WordToDecimalValueMapper();
-        w2R = new TypeOneParser();
-        s2A = new TypeTwoParser();
+        romanToNumeral = new RomanToNumeral();
+        typeOneParser = new TypeOneParser();
+        typeTwoParser = new TypeTwoParser();
+        wordToValueMapper = WordToValueMapper.getInstance();
 
     }
 
@@ -28,19 +26,19 @@ public class InterGalacticUnitsComputerTest {
                 "prok is V",
                 "pish is X",
                 "tegj is L"};
-        String words[][];
+        String[][] words;
         for(var line : Sentences){
-            String[] wordAndValues  = w2R.parse(line);
-            w2RVM.map(wordAndValues[0],wordAndValues[1]);
+            String[] wordAndValues  = typeOneParser.parse(line);
+            wordToValueMapper.map(wordAndValues[0],wordAndValues[1]);
         }
-        String sentences2[] = new String[] {
+        String[] sentences2 = new String[] {
                 "glob glob Silver is 34 Credits",
                 "glob prok Gold is 57800 Credits",
                 "pish pish Iron is 3910 Credits"
         };
-        String wordAndValue[][] = new String[sentences2.length][2];
+        String[][] wordAndValue = new String[sentences2.length][2];
         for (int index = 0; index<sentences2.length;index++ ) {
-            String gotFromSentence[][] =  s2A.parse(sentences2[index]);
+            String[][] gotFromSentence =  typeTwoParser.parse(sentences2[index]);
             wordAndValue[index] = iGUC.compute(gotFromSentence);
 
         }

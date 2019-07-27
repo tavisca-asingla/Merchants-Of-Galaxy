@@ -2,12 +2,12 @@ package com.tavisca.workshops.tdd;
 
 public class ParsedQuestionSolver {
 //    ResultsCalculator resultsCalculator;
-    RomanToNumeral romanToNumeral;
-    WordToRomanValueMapper wordToRomanValueMapper;
-    WordToDecimalValueMapper wordToDecimalValueMapper;
+    private RomanToNumeral romanToNumeral;
+//    WordToRomanValueMapper wordToRomanValueMapper;
+    private WordToValueMapper wordToValueMapper;
     public String solve(String[][] parsedQuestion) {
-            wordToRomanValueMapper = WordToRomanValueMapper.getInstance();
-            wordToDecimalValueMapper = WordToDecimalValueMapper.getInstance();
+//            wordToRomanValueMapper = WordToRomanValueMapper.getInstance();
+            wordToValueMapper = WordToValueMapper.getInstance();
             String result = "";
             try{
             romanToNumeral = new RomanToNumeral();
@@ -33,7 +33,7 @@ public class ParsedQuestionSolver {
         }
         return results;
     }
-    int multiply(float[] operands) {
+    private int multiply(float[] operands) {
         float result = 1.0f;
         for (var operand:
                 operands) {
@@ -46,7 +46,7 @@ public class ParsedQuestionSolver {
         String result = "";
         String finalRoman = "";
         for (int index = 0; index < toComputeRoman.length; index++) {
-            finalRoman += ((getValue(toComputeRoman[index])));
+            finalRoman += ((wordToValueMapper.get(toComputeRoman[index])));
             result += toComputeRoman[index] + " ";
         }
 //            resultsCalculator = new ResultsCalculator();
@@ -59,23 +59,23 @@ public class ParsedQuestionSolver {
         String toCompute = "";
         float[] floats = new float[2];
         for(int index = 0; index < toMultiply.length-1; index++){
-            toCompute += (getValue(toMultiply[index]));
+            toCompute += (wordToValueMapper.get(toMultiply[index]));
             result += toMultiply[index] + " ";
         }
         floats[0] = romanToNumeral.convert(toCompute);
-        floats[1] = Float.parseFloat(getValue(toMultiply[toMultiply.length-1]));
+        floats[1] = Float.parseFloat(wordToValueMapper.get(toMultiply[toMultiply.length-1]));
         result += toMultiply[toMultiply.length-1] + " is ";
         result += multiply(floats)+ " Credits";
         return result;
     }
 
-    private String getValue(String key){
-        if(wordToRomanValueMapper.get(key)!=null)
-            return wordToRomanValueMapper.get(key);
-        else if(wordToDecimalValueMapper.get(key)!=null)
-            return wordToDecimalValueMapper.get(key);
-        else
-            throw new IllegalArgumentException("Invalid Argument");
-
-    }
+//    private String getValue(String key){
+//        if(wordToRomanValueMapper.get(key)!=null)
+//            return wordToRomanValueMapper.get(key);
+//        else if(wordToValueMapper.get(key)!=null)
+//            return wordToValueMapper.get(key);
+//        else
+//            throw new IllegalArgumentException("Invalid Argument");
+//
+//    }
 }

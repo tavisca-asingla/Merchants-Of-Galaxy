@@ -3,7 +3,7 @@ package com.tavisca.workshops.tdd;
 public class InterGalacticUnitsComputer {
     public String[] compute(String[][] gotFromSentence) {
         RomanToNumeral romanToNumeral = new RomanToNumeral();
-        WordToRomanValueMapper wordToValueMapper = WordToRomanValueMapper.getInstance();
+        WordToValueMapper wordToValueMapper = WordToValueMapper.getInstance();
         String roman = "";
         for (var word: gotFromSentence[0]) {
             roman += wordToValueMapper.get(word);
