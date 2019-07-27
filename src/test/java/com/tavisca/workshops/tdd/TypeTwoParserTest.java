@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SentenceToArrayParserTest {
+class TypeTwoParserTest {
 
     @Test
     public void canConvertFromSentenceToStringsJaggedArray(){
-        SentenceToArrayParser s = new SentenceToArrayParser();
+        TypeTwoParser s = new TypeTwoParser();
         String arr[][] = s.parse("glob glob Silver is 34 credits");
         String given[] = arr[0];
         String find = arr[1][0];

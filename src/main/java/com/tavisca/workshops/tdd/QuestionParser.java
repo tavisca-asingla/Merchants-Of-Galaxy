@@ -12,4 +12,11 @@ public class QuestionParser {
         String wordsToCompute[] = Arrays.copyOfRange(words,startingIndex,words.length-1);
         return new String[][]{{quest},wordsToCompute};
     }
+    public String[][][] parseMany(String[] statements){
+        String[][][] parsedResults = new String[statements.length][][];
+        for(int index = 0 ; index<statements.length;index++){
+            parsedResults[index] = parse(statements[index]);
+        }
+        return parsedResults;
+    }
 }

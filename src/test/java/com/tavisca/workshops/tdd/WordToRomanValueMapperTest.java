@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WordToRomanValueMapperTest {
     WordToRomanValueMapper w ;
-    WordToRomanParser w2R;
+    TypeOneParser w2R;
     @BeforeEach
     public void initialize(){
-        w = new WordToRomanValueMapper();
-        w2R = new WordToRomanParser();
+        w = WordToRomanValueMapper.getInstance();
+        w2R = new TypeOneParser();
     }
 
     @Test

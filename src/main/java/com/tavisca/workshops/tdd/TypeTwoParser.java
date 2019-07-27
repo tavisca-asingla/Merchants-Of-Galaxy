@@ -1,6 +1,6 @@
 package com.tavisca.workshops.tdd;
 import java.util.Arrays;
-public class SentenceToArrayParser {
+public class TypeTwoParser {
 
     public String[][] parse(String s) {
         String allInfo[] = s.split(" is ");
@@ -10,5 +10,12 @@ public class SentenceToArrayParser {
         String credits[] = new String[] {allInfo[1].split(" ")[0]};
         String toReturn[][] = new String[][]{given,find,credits};
         return toReturn;
+    }
+    public String[][][] parseMany(String[] statements){
+        String[][][] parsedResults = new String[statements.length][][];
+        for(int index = 0 ; index<statements.length;index++){
+            parsedResults[index] = parse(statements[index]);
+        }
+        return parsedResults;
     }
 }

@@ -7,18 +7,18 @@ public class InterGalacticUnitsComputerTest {
     InterGalacticUnitsComputer iGUC ;
     WordToRomanValueMapper w2RVM;
 //    WordToDecimalValueMapper w2NVM;
-    WordToRomanParser w2R ;
+    TypeOneParser w2R ;
     RomanToNumeral r2N;
-    SentenceToArrayParser s2A;
+    TypeTwoParser s2A;
 
     @BeforeEach
     public void init(){
         iGUC = new InterGalacticUnitsComputer();
         r2N = new RomanToNumeral();
-        w2RVM = new WordToRomanValueMapper();
+        w2RVM = WordToRomanValueMapper.getInstance();
 //        w2NVM = new WordToDecimalValueMapper();
-        w2R = new WordToRomanParser();
-        s2A = new SentenceToArrayParser();
+        w2R = new TypeOneParser();
+        s2A = new TypeTwoParser();
 
     }
 
