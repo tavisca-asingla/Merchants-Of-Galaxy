@@ -35,7 +35,7 @@ public class ParsedQuestionSolver {
     }
     private int multiply(float[] operands) {
         float result = 1.0f;
-        for (var operand:
+        for (float operand:
                 operands) {
             result *= operand;
         }
