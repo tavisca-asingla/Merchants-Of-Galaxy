@@ -5,7 +5,7 @@ public class InterGalacticUnitsComputer {
         RomanToNumeral romanToNumeral = new RomanToNumeral();
         WordToValueMapper wordToValueMapper = WordToValueMapper.getInstance();
         String roman = "";
-        for (var word: gotFromSentence[0]) {
+        for (String word: gotFromSentence[0]) {
             roman += wordToValueMapper.get(word);
         }
         int A = romanToNumeral.convert(roman);
