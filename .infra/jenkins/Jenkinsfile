@@ -44,7 +44,7 @@ pipeline {
             label: "Building Docker Image"
             }
         }
-        stage('Publish DockerImage')F
+        stage('Publish DockerImage')
         {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
