@@ -39,12 +39,12 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-                    docker build -t "merchant" .infra/docker/
+                    docker build -t "merchant" .
                 ''',
             label: "Building Docker Image"
             }
         }
-        stage('Publish DockerImage')
+        stage('Publish DockerImage')F
         {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
