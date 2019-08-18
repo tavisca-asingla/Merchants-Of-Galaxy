@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-                    sh 'docker build -t singla/merchant:latest .'
+                    sh 'docker build -t "merchant" -f Dockerfile .infra/docker/Dockerfile
                 ''',
             label: "Building Docker Image"
             }
