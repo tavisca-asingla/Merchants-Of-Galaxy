@@ -54,10 +54,11 @@ pipeline {
             }
         }
     }
+    }
     post{
         always{
             deleteDir()
         }
     }
 }
-}
+
