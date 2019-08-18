@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    sh 'docker build -t singla/merchant:latest .'
                 ''',
             label: "Building Docker Image"
             }
@@ -47,12 +47,10 @@ pipeline {
         stage('Publish DockerImage')
         {
             steps {
-                sh script: '''
-                    docker.withRegistry( '', registryCredential ) {
-                                dockerImage.push()
-                              }
-                ''',
-            label: "Publishing Docker Image"
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                          sh 'docker push shanem/spring-petclinic:latest'
+
             }
         }
     }
