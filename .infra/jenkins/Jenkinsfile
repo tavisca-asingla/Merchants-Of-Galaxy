@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "singla/merchant"
+        registry = "singla/merchantsingla"
         registryCredential = 'dockerhub'
     }
     agent any
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-                    docker build -t "merchant" .
+                    docker build -t "merchantsingla" .
                 ''',
             label: "Building Docker Image"
             }
@@ -49,8 +49,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                          sh "docker tag merchant:latest singla/merchant:latest"
-                          sh 'docker push singla/merchant:latest'
+                          sh "docker tag merchantsingla:latest singla/merchantsingla:latest"
+                          sh 'docker push singla/merchantsingla:latest'
 
             }
         }
