@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-                    docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 ''',
             label: "Building Docker Image"
             }
@@ -48,7 +48,9 @@ pipeline {
         {
             steps {
                 sh script: '''
-                    docker.build registry + ":$BUILD_NUMBER"
+                    docker.withRegistry( '', registryCredential ) {
+                                dockerImage.push()
+                              }
                 ''',
             label: "Publishing Docker Image"
             }
