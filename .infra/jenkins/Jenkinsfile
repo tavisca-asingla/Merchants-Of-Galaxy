@@ -49,6 +49,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                          sh "docker tag merchant:latest singla/merchant:latest"
                           sh 'docker push singla/merchant:latest'
 
             }
