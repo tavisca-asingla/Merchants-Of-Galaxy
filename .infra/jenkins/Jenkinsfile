@@ -30,6 +30,9 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am in Sonarqube scan"
+                    ./gradlew sonarqube \
+                      -Dsonar.host.url=http://172.16.5.215:9000 \
+                      -Dsonar.login=3c01046e5d30754690388fe45e516d4ba9320308
                 ''',
             label: "Running Sonarqube Scan"
             }
