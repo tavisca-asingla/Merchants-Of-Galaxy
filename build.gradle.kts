@@ -1,12 +1,18 @@
 plugins {
     java
+    id("org.sonarqube") version "2.6"
 }
-
 group = "com.tavisca.workshops"
-version = "1.0-SNAPSHOT"
+//version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+val jar by tasks.getting(Jar::class) {
+    manifest {
+        attributes["Main-Class"] = "com.tavisca.workshops.tdd.Merchant"
+    }
 }
 
 dependencies {
@@ -19,7 +25,7 @@ dependencies {
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_10
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.register<Test>("hidden-tests")

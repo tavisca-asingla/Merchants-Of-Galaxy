@@ -1,0 +1,70 @@
+pipeline {
+    environment {
+        registry = "singla/merchantsingla"
+        registryCredential = 'dockerhub'
+    }
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh script: '''
+                    echo "I am in build step"
+                    chmod +x gradlew
+                    ./gradlew build
+                ''',
+            label: "Building Project"
+            }
+        }
+        stage('Test')
+        {
+            steps {
+                sh script: '''
+                    echo "I am in Test step"
+                    ./gradlew test
+                ''',
+            label: "Running Unit Test Cases"
+            }
+        }
+        stage('Static Code Analysis')
+        {
+            steps {
+                sh script: '''
+                    echo "I am in Sonarqube scan"
+                    ./gradlew sonarqube \
+                      -Dsonar.host.url=http://sonarcloud.io \
+                      -Dsonar.organization=tavisca-asingla\
+                      -Dsonar.login=698f5d8f0f12d798a6ec064b26b800435b1ddf34\
+                      -Dsonar.projectKey=tavisca-asingla_Merchants-Of-Galaxy
+                ''',
+            label: "Running Sonarqube Scan"
+            }
+        }
+        stage('Build DockerImage')
+        {
+            steps {
+                sh script: '''
+                    echo "I am Building DockerImage ="
+                    docker build -t "merchantsingla" .
+                ''',
+            label: "Building Docker Image"
+            }
+        }
+        stage('Publish DockerImage')
+        {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                          sh "docker tag merchantsingla:latest singla/merchantsingla:latest"
+                          sh 'docker push singla/merchantsingla:latest'
+
+            }
+        }
+    }
+    }
+    post{
+        always{
+            deleteDir()
+        }
+    }
+}
+

@@ -27,7 +27,7 @@ public class InterGalacticUnitsComputerTest {
                 "pish is X",
                 "tegj is L"};
         String[][] words;
-        for(var line : Sentences){
+        for(String line : Sentences){
             String[] wordAndValues  = typeOneParser.parse(line);
             wordToValueMapper.map(wordAndValues[0],wordAndValues[1]);
         }
